@@ -1,15 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using @event;
-using state;
+using game.entity;
+using game.state;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    
     public State CurrentState { get; set; }
+
+    public List<Enemy> enemies;
 
     private void Awake()
     {

@@ -1,9 +1,9 @@
 ﻿using System;
-using @event.listener;
-using state;
+using game.listener;
+using game.state;
 using UnityEngine;
 
-namespace @event
+namespace game.@event
 {
     public class EventManager
     {

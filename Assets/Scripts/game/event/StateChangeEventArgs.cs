@@ -1,7 +1,7 @@
 ﻿using System;
-using state;
+using game.state;
 
-namespace @event
+namespace game.@event
 {
     public class StateChangeEventArgs : EventArgs
     {

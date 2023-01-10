@@ -1,11 +1,11 @@
 ﻿using System;
-using state;
+using game.state;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace @event
+namespace game.@event
 {
-    public class StateChangeEvent
+    public class StateChangeEvent : api.@event.IEvent
     {
         public event EventHandler<StateChangeEventArgs> OnStateChange;
         
@@ -39,9 +39,9 @@ namespace @event
             }
         }
 
-        protected virtual void OnComplete(StateChangeEventArgs e)
+        public virtual void OnComplete(EventArgs e)
         {
-            OnStateChange?.Invoke(this, e);
+            OnStateChange?.Invoke(this, (StateChangeEventArgs) e);
         }
     }
 }

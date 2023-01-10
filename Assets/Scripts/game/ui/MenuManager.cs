@@ -1,9 +1,8 @@
-﻿using @event;
-using state;
+﻿using game.@event;
+using game.state;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace ui
+namespace game.ui
 {
     public class MenuManager : MonoBehaviour
     {

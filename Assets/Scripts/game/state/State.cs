@@ -1,4 +1,4 @@
-namespace state
+namespace game.state
 {
     public enum State
     {
