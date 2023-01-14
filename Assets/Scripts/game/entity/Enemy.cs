@@ -8,7 +8,7 @@ namespace game.entity
         {
             
         }
-        
+
         public override void Spawn()
         {
             
