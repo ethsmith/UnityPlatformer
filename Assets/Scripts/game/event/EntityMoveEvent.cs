@@ -1,5 +1,7 @@
 ﻿using System;
 using api.entity;
+using game.controller;
+using game.entity;
 using game.@event.args;
 using UnityEngine;
 
@@ -51,6 +53,19 @@ namespace game.@event
             };
             
             OnEntityMove?.Invoke(this, data);
+
+            if (!_isCancelled)
+            {
+                // Handle Movement
+                if (_pawn is Player player)
+                {
+                    GameManager.GetInstance().GetPlayerController().HandleMovement();
+                }
+                else
+                {
+                    GameManager.GetInstance().GetEnemyController().HandleMovement();
+                }
+            }
         }
 
         public bool IsCancellable()

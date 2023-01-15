@@ -1,7 +1,10 @@
 ﻿namespace game.controller
 {
-    public class EnemyController
+    public class EnemyController : Controller
     {
-        
+        public void HandleMovement()
+        {
+            
+        }
     }
 }
