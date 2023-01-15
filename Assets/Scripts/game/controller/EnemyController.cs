@@ -1,6 +1,6 @@
 ﻿namespace game.controller
 {
-    public class EnemyController : Controller
+    public class EnemyController
     {
         public void HandleMovement()
         {

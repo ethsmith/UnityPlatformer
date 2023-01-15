@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using game.controller;
 using game.entity;
 using game.state;
 using UnityEngine;
@@ -10,6 +11,10 @@ public class GameManager : MonoBehaviour
     public State CurrentState { get; set; }
 
     public List<Enemy> enemies;
+
+    private PlayerController _playerController = new();
+    
+    private EnemyController _enemyController = new();
 
     private void Awake()
     {
@@ -38,5 +43,15 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance()
     {
         return _instance;
+    }
+    
+    public PlayerController GetPlayerController()
+    {
+        return _playerController;
+    }
+    
+    public EnemyController GetEnemyController()
+    {
+        return _enemyController;
     }
 }

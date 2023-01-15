@@ -13,29 +13,37 @@ namespace game.@event
         
         private readonly Pawn _pawn;
         
-        private readonly Vector2 _oldPosition;
+        // private readonly Vector2 _oldPosition;
+        //
+        // private readonly Vector2 _newPosition;
         
-        private readonly Vector2 _newPosition;
+        private readonly MovementDirection _direction;
         
         private bool _isCancelled;
 
         private bool _isCancellable;
         
-        public EntityMoveEvent(Pawn pawn, Vector2 oldPosition, Vector2 newPosition)
+        public EntityMoveEvent(Pawn pawn, MovementDirection movementDirection)
         {
             _pawn = pawn;
-            _oldPosition = oldPosition;
-            _newPosition = newPosition;
+            // _oldPosition = oldPosition;
+            // _newPosition = newPosition;
+            _direction = movementDirection;
         }
         
-        public Vector2 GetOldPosition()
-        {
-            return _oldPosition;
-        }
+        // public Vector2 GetOldPosition()
+        // {
+        //     return _oldPosition;
+        // }
+        //
+        // public Vector2 GetNewPosition()
+        // {
+        //     return _newPosition;
+        // }
         
-        public Vector2 GetNewPosition()
+        public MovementDirection GetDirection()
         {
-            return _newPosition;
+            return _direction;
         }
         
         public Pawn GetPawn()
@@ -48,8 +56,7 @@ namespace game.@event
             var data = new EntityMoveEventArgs
             {
                 Pawn = _pawn,
-                OldPosition = _oldPosition,
-                NewPosition = _newPosition
+                Direction = _direction
             };
             
             OnEntityMove?.Invoke(this, data);
@@ -59,7 +66,7 @@ namespace game.@event
             // Handle Movement
             if (_pawn is Player player)
             {
-                GameManager.GetInstance().GetPlayerController().HandleMovement();
+                GameManager.GetInstance().GetPlayerController().HandleMovement(data);
             }
             else
             {
