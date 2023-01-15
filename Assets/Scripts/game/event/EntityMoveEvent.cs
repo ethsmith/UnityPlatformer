@@ -54,17 +54,16 @@ namespace game.@event
             
             OnEntityMove?.Invoke(this, data);
 
-            if (!_isCancelled)
+            if (_isCancelled) return;
+            
+            // Handle Movement
+            if (_pawn is Player player)
             {
-                // Handle Movement
-                if (_pawn is Player player)
-                {
-                    GameManager.GetInstance().GetPlayerController().HandleMovement();
-                }
-                else
-                {
-                    GameManager.GetInstance().GetEnemyController().HandleMovement();
-                }
+                GameManager.GetInstance().GetPlayerController().HandleMovement();
+            }
+            else
+            {
+                GameManager.GetInstance().GetEnemyController().HandleMovement();
             }
         }
 
