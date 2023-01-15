@@ -1,7 +1,7 @@
 ﻿using System;
 using api.entity;
 
-namespace game.@event
+namespace game.@event.args
 {
     public class EntitySpawnEventArgs : EventArgs
     {

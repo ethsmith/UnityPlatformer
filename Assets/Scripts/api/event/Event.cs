@@ -5,7 +5,11 @@ namespace api.@event
     public interface IEvent
     {
         public void Fire();
+
+        public bool IsCancellable();
         
-        public void OnComplete(EventArgs e);
+        public bool IsCancelled();
+        
+        public void SetCancelled(bool cancelled);
     }
 }

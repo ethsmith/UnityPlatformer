@@ -1,7 +1,7 @@
 ﻿using System;
 using game.state;
 
-namespace game.@event
+namespace game.@event.args
 {
     public class StateChangeEventArgs : EventArgs
     {

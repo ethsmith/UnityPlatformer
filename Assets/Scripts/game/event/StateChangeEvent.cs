@@ -1,4 +1,5 @@
 ﻿using System;
+using game.@event.args;
 using game.state;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,10 @@ namespace game.@event
         
         private readonly State _newState;
         
+        private bool _isCancelled;
+
+        private bool _isCancellable;
+        
         public StateChangeEvent(State previousState, State newState)
         {
             _previousState = previousState;
@@ -21,27 +26,28 @@ namespace game.@event
 
         public void Fire()
         {
-            var data = new StateChangeEventArgs();
-
-            try
+            var data = new StateChangeEventArgs
             {
-                Debug.Log("State changed, handling event...");
+                PreviousState = _previousState,
+                NewState = _newState
+            };
 
-                data.PreviousState = _previousState;
-                data.NewState = _newState;
-                
-                SceneManager.LoadScene(_newState.GetLevelToLoad());
-                
-                OnComplete(data);
-            } catch (Exception e)
-            {
-                Debug.Log("Error occurred while handling event: " + e.Message);
-            }
+            OnStateChange?.Invoke(this, data);
         }
 
-        public virtual void OnComplete(EventArgs e)
+        public bool IsCancellable()
         {
-            OnStateChange?.Invoke(this, (StateChangeEventArgs) e);
+            return _isCancellable;
+        }
+
+        public bool IsCancelled()
+        {
+            return _isCancelled;
+        }
+
+        public void SetCancelled(bool cancelled)
+        {
+            _isCancelled = cancelled;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using api.entity;
 using game.entity;
+using game.@event.args;
 using UnityEngine;
 
 namespace game.@event
@@ -10,6 +11,10 @@ namespace game.@event
         public event EventHandler<EntitySpawnEventArgs> OnEntitySpawn;
         
         private readonly Pawn _pawn;
+        
+        private bool _isCancelled;
+
+        private bool _isCancellable;
         
         public EntitySpawnEvent(Pawn pawn)
         {
@@ -28,25 +33,27 @@ namespace game.@event
 
         public void Fire()
         {
-            var data = new EntitySpawnEventArgs();
-
-            try
+            var data = new EntitySpawnEventArgs
             {
-                Debug.Log("Enemy spawned, handling event...");
+                Pawn = _pawn
+            };
 
-                data.Pawn = _pawn;
-                _pawn.Spawn();
-                
-                OnComplete(data);
-            } catch (Exception e)
-            {
-                Debug.Log("Error occurred while handling event: " + e.Message);
-            }
+            OnEntitySpawn?.Invoke(this, data);
         }
 
-        public virtual void OnComplete(EventArgs e)
+        public bool IsCancellable()
         {
-            OnEntitySpawn?.Invoke(this, (EntitySpawnEventArgs) e);
+            return _isCancellable;
+        }
+
+        public bool IsCancelled()
+        {
+            return _isCancelled;
+        }
+
+        public void SetCancelled(bool cancelled)
+        {
+            _isCancelled = cancelled;
         }
     }
 }
