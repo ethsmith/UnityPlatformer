@@ -8,8 +8,7 @@ namespace game.@event
 {
     public class EntitySpawnEvent : api.@event.IEvent
     {
-        public event EventHandler<EntitySpawnEventArgs> OnEntitySpawn;
-        
+
         private readonly Pawn _pawn;
         
         private bool _isCancelled;
@@ -38,7 +37,7 @@ namespace game.@event
                 Pawn = _pawn
             };
 
-            OnEntitySpawn?.Invoke(this, data);
+            Handler?.Invoke(this, data);
         }
 
         public bool IsCancellable()
@@ -55,5 +54,7 @@ namespace game.@event
         {
             _isCancelled = cancelled;
         }
+
+        public event EventHandler<EventArgs> Handler;
     }
 }

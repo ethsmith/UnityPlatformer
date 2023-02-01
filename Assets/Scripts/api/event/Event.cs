@@ -11,5 +11,7 @@ namespace api.@event
         public bool IsCancelled();
         
         public void SetCancelled(bool cancelled);
+
+        public event EventHandler<EventArgs> Handler;
     }
 }

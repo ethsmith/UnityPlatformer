@@ -8,17 +8,15 @@ namespace game.@event
 {
     public class StateChangeEvent : api.@event.IEvent
     {
-        public event EventHandler<StateChangeEventArgs> OnStateChange;
+        private readonly IState _previousState;
         
-        private readonly State _previousState;
-        
-        private readonly State _newState;
+        private readonly IState _newState;
         
         private bool _isCancelled;
 
         private bool _isCancellable;
         
-        public StateChangeEvent(State previousState, State newState)
+        public StateChangeEvent(IState previousState, IState newState)
         {
             _previousState = previousState;
             _newState = newState;
@@ -32,7 +30,7 @@ namespace game.@event
                 NewState = _newState
             };
 
-            OnStateChange?.Invoke(this, data);
+            Handler?.Invoke(this, data);
         }
 
         public bool IsCancellable()
@@ -49,5 +47,7 @@ namespace game.@event
         {
             _isCancelled = cancelled;
         }
+
+        public event EventHandler<EventArgs> Handler;
     }
 }

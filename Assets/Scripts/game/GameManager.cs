@@ -7,14 +7,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    
-    public State CurrentState { get; set; }
+
+    public StateController stateController = new();
 
     public List<Enemy> enemies;
 
-    private PlayerController _playerController = new();
+    private readonly PlayerController _playerController = new();
     
-    private EnemyController _enemyController = new();
+    private readonly EnemyController _enemyController = new();
 
     private void Awake()
     {
@@ -53,5 +53,10 @@ public class GameManager : MonoBehaviour
     public EnemyController GetEnemyController()
     {
         return _enemyController;
+    }
+    
+    public StateController GetStateController()
+    {
+        return stateController;
     }
 }

@@ -5,8 +5,8 @@ namespace game.@event.args
 {
     public class StateChangeEventArgs : EventArgs
     {
-        public State PreviousState { get; set; }
+        public IState PreviousState { get; set; }
         
-        public State NewState { get; set; }
+        public IState NewState { get; set; }
     }
 }

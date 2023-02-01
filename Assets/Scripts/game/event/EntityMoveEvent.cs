@@ -9,8 +9,7 @@ namespace game.@event
 {
     public class EntityMoveEvent : api.@event.IEvent
     {
-        public event EventHandler<EntityMoveEventArgs> OnEntityMove; 
-        
+
         private readonly Pawn _pawn;
         
         // private readonly Vector2 _oldPosition;
@@ -59,7 +58,7 @@ namespace game.@event
                 Direction = _direction
             };
             
-            OnEntityMove?.Invoke(this, data);
+            Handler?.Invoke(this, data);
 
             if (_isCancelled) return;
             
@@ -88,5 +87,7 @@ namespace game.@event
         {
             _isCancelled = cancelled;
         }
+
+        public event EventHandler<EventArgs> Handler;
     }
 }

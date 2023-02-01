@@ -7,11 +7,11 @@ namespace game.@event
 {
     public class EventManager
     {
-        public static void FireStateChangeEvent(State previousState, State newState)
+        public static void FireStateChangeEvent(IState previousState, IState newState)
         {
             StateChangeEvent stateChangeEvent = new StateChangeEvent(previousState, newState);
-            stateChangeEvent.OnStateChange += StateChangeListener.OnStageChange;
-            stateChangeEvent.OnStateChange += LogEventCompleted;
+            stateChangeEvent.Handler += new StateChangeListener(stateChangeEvent).OnFire;
+            stateChangeEvent.Handler += LogEventCompleted;
             stateChangeEvent.Fire();
         }
 
